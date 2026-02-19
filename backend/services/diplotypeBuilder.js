@@ -1,5 +1,7 @@
 exports.buildDiplotype = (geneVariants, targetGene) => {
-  if (!geneVariants || !geneVariants[targetGene]) {
+
+  // Safety guard
+  if (!targetGene || !geneVariants || !geneVariants[targetGene]) {
     return {
       diplotype: "*?/*?",
       detectedVariants: []
@@ -8,20 +10,27 @@ exports.buildDiplotype = (geneVariants, targetGene) => {
 
   const variants = geneVariants[targetGene];
 
+  // Extract valid star alleles only
   const starAlleles = variants
     .map(v => v.star)
-    .filter(Boolean);
+    .filter(star => typeof star === "string");
 
-  const detectedVariants = variants.map(v => ({
-    rsid: v.rsid
-  }));
+  // Ensure deterministic ordering
+  const sortedStars = [...starAlleles].sort();
+
+  // Extract rsids safely
+  const detectedVariants = variants
+    .filter(v => typeof v.rsid === "string")
+    .map(v => ({
+      rsid: v.rsid
+    }));
 
   let diplotype = "*?/*?";
 
-  if (starAlleles.length >= 2) {
-    diplotype = `${starAlleles[0]}/${starAlleles[1]}`;
-  } else if (starAlleles.length === 1) {
-    diplotype = `${starAlleles[0]}/*?`;
+  if (sortedStars.length >= 2) {
+    diplotype = `${sortedStars[0]}/${sortedStars[1]}`;
+  } else if (sortedStars.length === 1) {
+    diplotype = `${sortedStars[0]}/*?`;
   }
 
   return {

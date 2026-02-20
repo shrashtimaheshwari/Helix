@@ -6,7 +6,7 @@
 
 ## 🌍 Live Demo  
 🔗 **Live Application:** [https://helix-fa85.vercel.app/] 
-🎥 **LinkedIn Demo Video:** [https://drive.google.com/file/d/11wi_EjbJ_VaDW4uKax6WlkCWTA5DnAYr/view?usp=sharing]  
+🎥 **LinkedIn Demo Video:** [https://www.linkedin.com/posts/shloknaidu_rift2026-pharmaguard-pharmacogenomics-ugcPost-7430442068713369600-Fl8Z?utm_source=share&utm_medium=member_desktop&rcm=ACoAAExzGggBjkPUUP9rQifXAPNgqNz049z8YBE]  
 
 ## 📌 Overview  
 

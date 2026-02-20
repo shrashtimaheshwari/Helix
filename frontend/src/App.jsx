@@ -1,35 +1,41 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Routes, Route, useLocation } from "react-router-dom";
+import Home from "./pages/Home";
+import RiskAssessment from "./pages/RiskAssessment";
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const location = useLocation();
+  const state = location.state || {};
+  const results = state.results || [];
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <Routes>
+      <Route path="/" element={<Home />} />
 
-export default App
+      <Route
+        path="/risk"
+        element={
+          results.length > 0 ? (
+            <RiskAssessment analyses={results} />
+          ) : (
+            <div className="min-h-screen flex items-center justify-center bg-slate-50">
+              <div className="text-center">
+                <h1 className="text-2xl font-bold text-slate-900 mb-4">
+                  No Analysis Results Found
+                </h1>
+                <p className="text-slate-600 mb-6">
+                  Please run an analysis first to view risk assessment results.
+                </p>
+                <a
+                  href="/"
+                  className="inline-block px-6 py-3 bg-teal-600 text-white font-semibold rounded-lg hover:bg-teal-700 transition-colors"
+                >
+                  Back to Home
+                </a>
+              </div>
+            </div>
+          )
+        }
+      />
+    </Routes>
+  );
+}

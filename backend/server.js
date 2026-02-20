@@ -7,6 +7,8 @@ const analyzeRoute = require("./routes/analyze");
 
 const app = express();
 
+const path = require("path");
+
 /* ==============================
    CORS Configuration
 ============================== */
@@ -30,6 +32,20 @@ app.use("/api/analyze", analyzeRoute);
 app.get("/", (req, res) => {
   res.send("Hilix Backend Running");
 });
+
+/* ==============================
+   Serve frontend in production
+============================== */
+const clientDist = path.join(__dirname, "..", "client", "client", "dist");
+
+if (process.env.NODE_ENV === "production" || process.env.SERVE_CLIENT === "true") {
+  app.use(express.static(clientDist));
+
+  // All other GET requests should return the frontend
+  app.get("/*", (req, res) => {
+    res.sendFile(path.join(clientDist, "index.html"));
+  });
+}
 
 app.get("/health", (req, res) => {
   res.status(200).json({ status: "ok" });

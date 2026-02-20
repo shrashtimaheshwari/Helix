@@ -36,7 +36,7 @@ app.get("/", (req, res) => {
 /* ==============================
    Serve frontend in production
 ============================== */
-const clientDist = path.join(__dirname, "..", "client", "client", "dist");
+const clientDist = path.join(__dirname, "..", "frontend", "dist");
 
 if (process.env.NODE_ENV === "production" || process.env.SERVE_CLIENT === "true") {
   app.use(express.static(clientDist));

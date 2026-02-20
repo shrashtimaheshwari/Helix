@@ -7,14 +7,7 @@ const { applyCpicRules } = require("../services/cpic/ruleEngine");
 const { mapSeverity } = require("../services/severityEngine");
 const { generateExplanation } = require("../services/llm/llmExplainer");
 const AnalysisLog = require("../models/AnalysisLog");
-const SUPPORTED_DRUGS = [
-  "CODEINE",
-  "WARFARIN",
-  "CLOPIDOGREL",
-  "SIMVASTATIN",
-  "AZATHIOPRINE",
-  "FLUOROURACIL",
-];
+const { SUPPORTED_DRUGS } = require("../services/formConfig");
 
 exports.analyze = async (req, res) => {
   try {

@@ -1,0 +1,76 @@
+🔹 Helix – Deployment Instructions
+1️⃣ Backend Deployment (Render)
+
+Prepare Backend Code
+
+Ensure all dependencies are listed in package.json (for Node.js) or requirements.txt (for Python).
+
+Include environment variables for:
+
+MongoDB Atlas URI
+
+API keys for LLM (if any)
+
+Any other config (CPIC rules file, etc.)
+
+Create a New Render Service
+
+Log in to Render
+
+Click New → Web Service
+
+Connect your GitHub/GitLab repo
+
+Select Environment: Node or Python, depending on your backend
+
+Set Build Command (e.g., npm install) and Start Command (e.g., npm start)
+
+Configure Environment Variables
+
+Add MongoDB URI, API keys, and other secrets under Environment → Environment Variables
+
+Deploy
+
+Click Deploy
+
+Render will build the backend and provide a public URL (e.g., https://helix-backend.onrender.com)
+
+2️⃣ Frontend Deployment (Vercel)
+
+Prepare Frontend Code
+
+Ensure package.json or vite.config.js / next.config.js points API calls to your backend URL on Render
+
+Create a New Vercel Project
+
+Log in to Vercel
+
+Click New Project → Import Git Repository
+
+Select your frontend repo
+
+Configure Environment Variables
+
+Set the backend base URL (Render URL) as an environment variable
+
+Example: REACT_APP_API_URL=https://helix-backend.onrender.com
+
+Deploy
+
+Click Deploy
+
+Vercel will provide a frontend URL (e.g., https://helix-frontend.vercel.app)
+
+3️⃣ Testing the Deployment
+
+Open the frontend URL in a browser
+
+Upload a VCF file
+
+Confirm that:
+
+The backend receives the request
+
+Clinical recommendations are returned
+
+JSON response and LLM explanations are displayed correctly

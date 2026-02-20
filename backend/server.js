@@ -42,7 +42,7 @@ if (process.env.NODE_ENV === "production" || process.env.SERVE_CLIENT === "true"
   app.use(express.static(clientDist));
 
   // All other GET requests should return the frontend
-  app.get("/*", (req, res) => {
+  app.get("*", (req, res) => {
     res.sendFile(path.join(clientDist, "index.html"));
   });
 }
